@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="calculator">
+            Calculator
+        </h1>
+        <div class="main">
+            <div class="input_container">
+                <input type="text" id="user_input">
+            </div>
+            <div class="buttons_container">
+                <button id="number_1" class="number_buttons" onclick="number_1()">1</button>
+                <button id="number_2" class="number_buttons" onclick="number_2()">2</button>
+                <button id="number_3" class="number_buttons" onclick="number_3()">3</button>
+                <button id="number_4" class="number_buttons" onclick="number_4()">4</button>
+                <button id="number_5" class="number_buttons" onclick="number_5()">5</button>
+                <button id="number_6" class="number_buttons" onclick="number_6()">6</button>
+                <button id="number_7" class="number_buttons" onclick="number_7()">7</button>
+                <button id="number_8" class="number_buttons" onclick="number_8()">8</button>
+                <button id="number_9" class="number_buttons" onclick="number_9()">9</button>
+                <button id="number_0" class="number_buttons" onclick="number_0()">0</button>
+
+                <button id="function_AC" class="function_buttons" onclick="clear_operation()">AC</button>
+                <button id="function_PLUS" class="function_buttons" onclick="add_operation()">+</button>
+                <button id="function_MINUS" class="function_buttons" onclick="minus_operation()">-</button>
+                <button id="function_MULTIPLICATION" class="function_buttons" onclick="multiplication_operation()">×</button>
+                <button id="function_DIVISION" class="function_buttons" onclick="division_operation()">÷</button>
+                <button id="function_=" class="function_buttons" onclick="perform()">=</button>
+                <button id="function_=" class="function_buttons" onclick="backspace()">←</button>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
