@@ -1,13 +1,17 @@
-    let number1 = null
-    let number2 = null
+    let number1 = 0
+    let number2 = 0
     let result = 0
-    let add = false
-    let minus = false
-    let mul = false
-    let div = false
+    // let add = false
+    // let minus = false
+    // let mul = false
+    // let div = false
     let test = ""
 
     let is_operand = false
+
+
+
+    //     CLEAR OPERATION DONE
 function clear_operation(){
 
     document.getElementById("user_input").value = "";
@@ -20,7 +24,7 @@ function add_operation(){
         test = document.getElementById("function_PLUS").innerHTML;
         document.getElementById("user_input").value += test
         let number1 = Number(document.getElementById("user_input").value)
-        add = true;
+        // add = true;
         is_operand = true;
     }
 }
@@ -29,7 +33,7 @@ function minus_operation(){
         test = document.getElementById("function_MINUS").innerHTML;
         document.getElementById("user_input").value += test
         number1 = Number(document.getElementById("user_input").value)
-        minus = true;
+        // minus = true;
         is_operand = true;
     }
 }
@@ -38,7 +42,7 @@ function multiplication_operation(){
         test = document.getElementById("function_MULTIPLICATION").innerHTML;
         document.getElementById("user_input").value += test
         number1 = Number(document.getElementById("user_input").value)
-        mul = true;
+        // mul = true;
         is_operand = true;
     }
 
@@ -48,34 +52,124 @@ function division_operation(){
         test = document.getElementById("function_DIVISION").innerHTML;
         document.getElementById("user_input").value += test
         number1 = Number(document.getElementById("user_input").value)
-        div = true;
+        // div = true;
         is_operand = true;
     }
 
 }
 
+//             PERFORM OPERATION 
+console.log(5 + "."+ 55);
+
 function perform(){
-    if(add){
-        number2 = Number(document.getElementById("user_input").value);
-        result = number1 + number2;
-        add = false;
+
+    let text = document.getElementById("user_input").value;
+    
+    let arr = [];
+    if( text[0] == "-"){
+        arr.push("-");
+        text = text.slice(1);
     }
-    else if(minus){
-        number2 = Number(document.getElementById("user_input").value);
-        minus = false;
+    else if(is_operand_function( text[0] ) || is_operand_function( text[text.length-1] ) ){
+        alert("please enter a valid opertion to perform");
+        return;
     }
-    else if(mul){
-        number2 = Number(document.getElementById("user_input").value);
-        mul = false;
+    number1 = 0;
+    result = 0;
+    let already_operand = false;
+    for( let i = 0; i < text.length ; i++){
+
+        if ( !isNaN(text[i]) ){
+            arr.push(text[i]);
+            already_operand = false;
+        }
+        else if( text[i] == "."){
+            arr.push(text[i]);
+            already_operand = true;
+        }
+        else if ( !already_operand && is_operand_function(text[i]) ){
+            arr.push(text[i]);
+            already_operand = true;
+        }
+        else{
+            alert("please enter a valid opertion to perform");
+            return;
+        }
+
     }
-    else if( div ){
-        number2 = Number(document.getElementById("user_input").value);
-        div = false;
+    arr.push("+");
+    console.log(arr);
+    
+    
+    let stack = [];
+    let operator = "+";
+    
+    for( let i = 0; i <= arr.length ; i++){
+        
+        if(!isNaN(arr[i])){
+            let j = i;
+            while ( !isNaN(arr[j]) && j < arr.length ){
+                number1 = number1 * 10 + Number(arr[j]);
+                j++;
+            }
+            i = j - 1;
+        }
+        else if ( arr[i] == "."){
+            let j = i+1;
+            while ( !isNaN(arr[j]) && j < arr.length ){
+                number2 = number2 * 10 + Number(arr[j]);
+                j++;
+            }
+            number1 = number1 + "." + number2;
+            number1 = Number(number1);
+            i = j -1;
+        }
+        
+        else{
+
+            if( operator === "+" ){
+                stack.push(number1);
+                console.log(`the stack in +  at iteration: ${i+1}`);
+                console.log(stack);
+                console.log(`the operator in +  at iteration: ${i+1}`);
+                console.log(operator);
+                
+                
+            } 
+            else if( operator === "-" ){
+                stack.push(-number1);
+                console.log(`the stack in - at iteration: ${i+1}`);
+                console.log(stack);
+                console.log(`the operator in -  at iteration: ${i+1}`);
+                console.log(operator);
+            }
+            
+            else if( operator === "×" ){
+                stack.push(stack.pop() * number1);
+                console.log(`the stack in * at iteration: ${i+1}`);
+                console.log(stack);
+                console.log(`the operator in *  at iteration: ${i+1}`);
+                console.log(operator);
+            }
+            else if( operator === "÷" ){
+                stack.push(stack.pop() / number1);
+                console.log(`the stack in / at iteration: ${i+1}`);
+                console.log(stack);
+                console.log(`the operator in /  at iteration: ${i+1}`);
+                console.log(operator);
+            }
+            operator = arr[i];
+            
+            number1 = 0;
+        }
     }
-    else {
-        alert("please select a valid opertion to perform");
+    stack.push(number1);
+    console.log(stack)
+    for(let i = 0; i < stack.length; i++){
+        result = result + stack[i];
     }
-   
+    
+    document.getElementById("user_input").value = result;
 
 }
 
@@ -131,8 +225,13 @@ function number_0 (){
     document.getElementById("user_input").value += test;
     is_operand = false
 }
+function number_point (){
+    test = document.getElementById("number_point").innerHTML;
+    document.getElementById("user_input").value += test;
+    is_operand = false
+}
     
-//          Backspace function 
+//          Backspace function   // done
 
 function backspace() {
     
@@ -142,9 +241,18 @@ function backspace() {
     document.getElementById("user_input").value = text;
     
     let last_char = text.slice(-1);
-    console.log(last_char)
 
-    if( last_char == "+" || last_char == "-" || last_char == "×" || last_char == "÷"   ){   
+    if(is_operand_function( last_char )){   
         is_operand = true;
     }
+}
+
+//          is_operand_function
+
+function is_operand_function( character ){
+
+    if( character == "+" || character == "-" || character == "×" || character == "÷"   ){   
+        return true;
+    }
+    return false;
 }
