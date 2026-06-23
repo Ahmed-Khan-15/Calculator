@@ -4,13 +4,19 @@
     color: white;
     border: none;
 }
+:root{
+    --dark-orange: #e0712a;
+    --close-purple: #50567a;
+}
 body{
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #101010;
+    height: 100vh;
 }
 h1{
-    font-size: 40px;
+    font-size: 45px;
     background: linear-gradient(to right, yellow, orange);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
      
@@ -25,7 +31,9 @@ h1{
     border-radius: 25px;
     background-image: radial-gradient(circle,#3d4163 0%,#464b6f 70%, #50567a 100%);
     background-color: #3d4163;
+    cursor: pointer;
 }
+
 .container{
     display: flex;
     flex-direction: column;
@@ -47,9 +55,15 @@ h1{
     grid-column: span 2;
 }
 .maths-buttons{
-    background-image: radial-gradient(circle,orange 0%,rgb(253, 179, 42) 70%, rgb(244, 200, 118) 100%);
+    background-image: radial-gradient(circle,#e0712a 0%,#ec8646 70%, #db8a58 100%); 
 }
 
+button:hover{
+    filter: brightness(1.15);
+}
+button:active{
+    filter: brightness(1.35);
+}
 
 .first-input{
     background-color: #101010;
@@ -68,11 +82,7 @@ h1{
 @media screen and (max-width: 480px) {
     h1{
     font-size: 30px;
-    background: linear-gradient(to right, yellow, orange);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-     
-    background-clip: text; 
-    color: transparent;
+    
 }
     .first-input{
     background-color: #101010;
@@ -98,11 +108,7 @@ h1{
 @media screen and (max-width: 380px) {
     h1{
     font-size: 20px;
-    background: linear-gradient(to right, yellow, orange);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-     
-    background-clip: text; 
-    color: transparent;
+    
 }
     .first-input{
     background-color: #101010;

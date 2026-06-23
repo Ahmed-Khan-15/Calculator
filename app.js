@@ -1,94 +1,56 @@
     let number1 = 0
     let number2 = 0
     let result = 0
-    // let add = false
-    // let minus = false
-    // let mul = false
-    // let div = false
-    let test = ""
+    
+    let expression = ""
 
-    let is_operand = false
+    let is_operand = false;
+    let is_point = false;
 
+//         Update Operation
 
-
+function Update_Expression(){
+    document.getElementById("user_input").value = expression;
+}
     //     CLEAR OPERATION DONE
 function clear_operation(){
-
-    document.getElementById("user_input").value = "";
-    test = "";
+    expression = "";
     is_operand = true;
-    
+    Update_Expression();
 }
-function add_operation(){
-    if(!is_operand){
-        test = document.getElementById("function_PLUS").innerHTML;
-        document.getElementById("user_input").value += test
-        let number1 = Number(document.getElementById("user_input").value)
-        // add = true;
-        is_operand = true;
-    }
-}
-function minus_operation(){
-    if(!is_operand){
-        test = document.getElementById("function_MINUS").innerHTML;
-        document.getElementById("user_input").value += test
-        number1 = Number(document.getElementById("user_input").value)
-        // minus = true;
-        is_operand = true;
-    }
-}
-function multiplication_operation(){
-    if(!is_operand){
-        test = document.getElementById("function_MULTIPLICATION").innerHTML;
-        document.getElementById("user_input").value += test
-        number1 = Number(document.getElementById("user_input").value)
-        // mul = true;
-        is_operand = true;
-    }
 
-}
-function division_operation(){
-    if(!is_operand){
-        test = document.getElementById("function_DIVISION").innerHTML;
-        document.getElementById("user_input").value += test
-        number1 = Number(document.getElementById("user_input").value)
-        // div = true;
-        is_operand = true;
-    }
-
-}
 
 //             PERFORM OPERATION 
-console.log(5 + "."+ 55);
+
+
 
 function perform(){
 
-    let text = document.getElementById("user_input").value;
     
     let arr = [];
-    if( text[0] == "-"){
+    if( expression[0] == "-"){
         arr.push("-");
-        text = text.slice(1);
+        expression = expression.slice(1);
     }
-    else if(is_operand_function( text[0] ) || is_operand_function( text[text.length-1] ) ){
+    else if(is_operand_function( expression[0] ) || is_operand_function( expression[expression.length-1] ) ){
         alert("please enter a valid opertion to perform");
         return;
     }
     number1 = 0;
     result = 0;
     let already_operand = false;
-    for( let i = 0; i < text.length ; i++){
+    for( let i = 0; i < expression.length ; i++){
 
-        if ( !isNaN(text[i]) ){
-            arr.push(text[i]);
+        if ( !isNaN(expression[i]) ){
+            arr.push(expression[i]);
             already_operand = false;
         }
-        else if( text[i] == "."){
-            arr.push(text[i]);
+        else if( expression[i] == "."){
+            arr.push(expression[i]);
             already_operand = true;
         }
-        else if ( !already_operand && is_operand_function(text[i]) ){
-            arr.push(text[i]);
+        else if ( !already_operand && is_operand_function(expression[i]) ){
+            arr.push(expression[i]);
             already_operand = true;
         }
         else{
@@ -129,34 +91,25 @@ function perform(){
 
             if( operator === "+" ){
                 stack.push(number1);
-                console.log(`the stack in +  at iteration: ${i+1}`);
-                console.log(stack);
-                console.log(`the operator in +  at iteration: ${i+1}`);
-                console.log(operator);
+                // console.log(`the stack in +  at iteration: ${i+1}`);
+                // console.log(stack);
+                // console.log(`the operator in +  at iteration: ${i+1}`);
+                // console.log(operator);
                 
                 
             } 
             else if( operator === "-" ){
                 stack.push(-number1);
-                console.log(`the stack in - at iteration: ${i+1}`);
-                console.log(stack);
-                console.log(`the operator in -  at iteration: ${i+1}`);
-                console.log(operator);
+                
             }
             
             else if( operator === "×" ){
                 stack.push(stack.pop() * number1);
-                console.log(`the stack in * at iteration: ${i+1}`);
-                console.log(stack);
-                console.log(`the operator in *  at iteration: ${i+1}`);
-                console.log(operator);
+                
             }
             else if( operator === "÷" ){
                 stack.push(stack.pop() / number1);
-                console.log(`the stack in / at iteration: ${i+1}`);
-                console.log(stack);
-                console.log(`the operator in /  at iteration: ${i+1}`);
-                console.log(operator);
+                
             }
             operator = arr[i];
             
@@ -175,79 +128,45 @@ function perform(){
 
 //           INPUT FUNCTIONS 
 
-function number_1 (){
-    test = document.getElementById("number_1").innerHTML;
-    document.getElementById("user_input").value += test;
+function get_number (button_element){
+    expression = expression + button_element.innerHTML;
+    Update_Expression();
     is_operand = false;
 }
-function number_2 (){
-    test = document.getElementById("number_2").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
+
+function number_point (point_button_element){
+    if(!is_operand){
+    expression = expression + point_button_element.innerHTML;
+    Update_Expression();
+    is_operand = true;
+    }
 }
-function number_3 (){
-    test = document.getElementById("number_3").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_4 (){
-    test = document.getElementById("number_4").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_5 (){
-    test = document.getElementById("number_5").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_6 (){
-    test = document.getElementById("number_6").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_7 (){
-    test = document.getElementById("number_7").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_8 (){
-    test = document.getElementById("number_8").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_9 (){
-    test = document.getElementById("number_9").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_0 (){
-    test = document.getElementById("number_0").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
-}
-function number_point (){
-    test = document.getElementById("number_point").innerHTML;
-    document.getElementById("user_input").value += test;
-    is_operand = false
+
+function math_operation(maths_button){
+    if(!is_operand){
+        expression = expression + maths_button.innerHTML;
+        Update_Expression();
+        number1 = Number(document.getElementById("user_input").value)
+        
+        is_operand = true;
+    }
 }
     
 //          Backspace function   // done
 
 function backspace() {
     
-    let text = document.getElementById("user_input").value;
+    expression = expression.slice(0, -1);
+    Update_Expression();
     
-    text = text.slice(0, -1);
-    document.getElementById("user_input").value = text;
-    
-    let last_char = text.slice(-1);
+    let last_char = expression.slice(-1);
 
     if(is_operand_function( last_char )){   
         is_operand = true;
     }
 }
 
-//          is_operand_function
+//          CHECCK OPERAND FUNCTION
 
 function is_operand_function( character ){
 
