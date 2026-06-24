@@ -51,9 +51,9 @@ h1{
 #function_AC{
     grid-column: span 2;
 }
-#number_0{
+/* #number_0{
     grid-column: span 2;
-}
+} */
 .maths-buttons{
     background-image: radial-gradient(circle,#e0712a 0%,#ec8646 70%, #db8a58 100%); 
 }
