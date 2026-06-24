@@ -21,25 +21,25 @@
             </div>
 
             <div class="all-buttons-container">
-                <button id="function_AC" class="function_buttons btns function-AC" >AC</button>
-                <button id="function_back" class="function_buttons btns function-back" >←</button>
-                <button id="function_DIVISION" class="function_buttons btns maths-buttons pink-buttons">÷</button>
-                <button id="number_1" class="number_buttons btns" >1</button>
-                <button id="number_2" class="number_buttons btns" >2</button>
-                <button id="number_3" class="number_buttons btns" >3</button>
-                <button id="function_MULTIPLICATION" class="function_buttons btns maths-buttons pink-buttons">×</button>
-                <button id="number_4" class="number_buttons btns"  >4</button>
-                <button id="number_5" class="number_buttons btns"  >5</button>
-                <button id="number_6" class="number_buttons btns"  >6</button>
-                <button id="function_MINUS" class="function_buttons btns maths-buttons pink-buttons">-</button>
-                <button id="number_7" class="number_buttons btns"  >7</button>
-                <button id="number_8" class="number_buttons btns"  >8</button>
-                <button id="number_9" class="number_buttons btns"  >9</button>
+                <button id="function_AC" class="function_buttons btns function-AC" onclick="clear_operation()" >AC</button>
+                <button id="function_back" class="function_buttons btns function-back" onclick="backspace()" >←</button>
+                <button id="function_DIVISION" class="function_buttons btns maths-buttons pink-buttons" onclick="math_operation(this)">÷</button>
+                <button id="number_1" class="number_buttons btns " onclick="get_number(this)" >1</button>
+                <button id="number_2" class="number_buttons btns " onclick="get_number(this)" >2</button>
+                <button id="number_3" class="number_buttons btns " onclick="get_number(this)" >3</button>
+                <button id="function_MULTIPLICATION" class="function_buttons btns maths-buttons pink-buttons" onclick="math_operation(this)">×</button>
+                <button id="number_4" class="number_buttons btns " onclick="get_number(this)"  >4</button>
+                <button id="number_5" class="number_buttons btns " onclick="get_number(this)"  >5</button>
+                <button id="number_6" class="number_buttons btns " onclick="get_number(this)"  >6</button>
+                <button id="function_MINUS" class="function_buttons btns maths-buttons pink-buttons" onclick="math_operation(this)">-</button>
+                <button id="number_7" class="number_buttons btns " onclick="get_number(this)"  >7</button>
+                <button id="number_8" class="number_buttons btns " onclick="get_number(this)"  >8</button>
+                <button id="number_9" class="number_buttons btns " onclick="get_number(this)"  >9</button>
                 <button id="function_PLUS" class="function_buttons btns maths-buttons pink-buttons">+</button>
-                <button id="number_0" class="number_buttons btns"  >0</button>
-                <button id="number_00" class="number_buttons btns"  >00</button>
-                <button id="number_point" class="point_button btns"  >.</button>
-                <button id="function_=" class="function_buttons btns pink-buttons function-equal" >=</button>
+                <button id="number_0" class="number_buttons btns " onclick="get_number(this)"  >0</button>
+                <button id="number_00" class="number_buttons btns " onclick="get_number(this)"  >00</button>
+                <button id="number_point" class="point_button btns" onclick="number_point(this)"  >.</button>
+                <button id="function_=" class="function_buttons btns pink-buttons function-equal" onclick="perform()" >=</button>
 
             </div>
         </div>
