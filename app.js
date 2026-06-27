@@ -7,7 +7,7 @@
 
 // Use: document.createElement, appendChild, remove
 import { Calculator_button_color } from "./constant.js";
-console.log(Calculator_button_color);
+// console.log(Calculator_button_color);
 let number1 = 0;
 let number2 = 0;
 let result = 0;
@@ -50,7 +50,7 @@ for (let i = 0; i < nodelistfornumbers.length; i++) {
 for (let i = 0; i < mathbuttons.length; i++) {
     mathbuttons[i].addEventListener("click",math_operation);
 }
- console.log(nodelistfornumbers);
+//  console.log(nodelistfornumbers);
 
 pointbutton.addEventListener("click",number_point);
 
@@ -86,7 +86,9 @@ function render_history_list(){
         delete_this_history.classList.add("Transparent");
         delete_this_history.textContent = "delete";
 
-        delete_this_history.addEventListener("click",(index) =>{
+        delete_this_history.addEventListener("click",() =>{
+            console.log(index);
+            
             historylist.splice(index,1);
             render_history_list();
         })
@@ -106,7 +108,7 @@ function render_history_list(){
         all_history_container.appendChild(historyDiv);
     })
 }
-
+// show_history();
 //           HISTORY FUNCTION
 
 function dont_show_history(){
@@ -284,7 +286,7 @@ function perform() {
     console.log(historylist);
     // console.log(`${expression} = ${result}`);
     
-    expression = result;
+    expression = String(result);
     Update_Expression();
 }
 
@@ -292,7 +294,7 @@ function perform() {
 //          Backspace function   // done
 
 function backspace() {
-
+    console.log(typeof expression);
     expression = expression.slice(0, -1);
     Update_Expression();
 

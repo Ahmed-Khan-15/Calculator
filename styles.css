@@ -66,18 +66,68 @@ h1{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 235px;
+    height: 330px;
     overflow-y: auto;
 }
+.all_history_container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.all_history_container::-webkit-scrollbar-track {
+    background: #1b1b1b;
+    border-radius: 10px;
+}
+
+.all_history_container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 10px;
+}
+
+.all_history_container::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+.history > * {
+    margin: 0 !important;
+}
 .history{
-    height: 17%;
+    height: 65px;
     /* border: 1px solid white; */
-    display: flex;
+    /* display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 2px;
     margin-top: 3px;
     margin-bottom: 3px;
 }
+.material-symbols-outlined {
+    font-size: 1.6rem !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-top: 5px !important;
+    cursor: pointer;
+    /* border: 1px solid purple; */
+}
+.equation_para{
+    /* border: 1px solid yellow; */
+    margin-left: auto !important;
+    margin-right: 10px !important;
+    font-size: 1.5rem;
+    grid-column-start: 1;
+    grid-column: span 4 / span 4;
+}
+.result_para{
+    /* border: 1px solid orange; */
+    font-size: 1.8rem;
+    margin-left: auto !important;
+    margin-right: 10px !important;
+    grid-column-start: 5;
+    grid-row-start: 2;
+    display: inline;
+}
+
 .clear_all{
     margin-top: auto;
     margin-left: 50px;
@@ -92,16 +142,6 @@ h1{
     top: 1%;
     left: 3%;
     cursor: pointer;
-}
-.material-symbols-outlined {
-    font-size: 1.1rem !important;
-    cursor: pointer;
-}
-.equation_para{
-    font-size: 1.1rem;
-}
-.result_para{
-    font-size: 1.1rem;
 }
 
 /* #function_AC{
@@ -145,8 +185,28 @@ button:active{
     background-color: transparent;
 }
 @media screen and (max-width: 480px) {
+    .history{
+    height: 55px;
+}
+.material-symbols-outlined {
+    font-size: 1.2rem !important;
+}
+.equation_para{
+    font-size: 1.2rem;
+    /* margin-right: 7px !important; */
+}
+.result_para{
+    font-size: 1.3rem;
+    display: inline;
+}
+    .container{
+    max-width: 70%;
+}
+    .all_history_container{
+    height: 230px;
+}
     h1{
-    font-size: 30px;
+    font-size: 35px;
     
 }
     .first-input{
@@ -171,8 +231,24 @@ button:active{
 }
 }
 @media screen and (max-width: 380px) {
+    .history{
+    height: 40px;
+}
+.material-symbols-outlined {
+    font-size: 1rem !important;
+}
+.equation_para{
+    font-size: 1rem;
+}
+.result_para{
+    font-size: 1.1rem;
+    display: inline;
+}
+.all_history_container{
+    height: 180px;
+}
     h1{
-    font-size: 20px;
+    font-size: 26px;
     
 }
     .first-input{
