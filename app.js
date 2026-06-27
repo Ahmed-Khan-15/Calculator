@@ -1,10 +1,18 @@
+// Okay good, for your next task: 
+
+// Every time the user clicks the = button, the full equation 
+// (e.g., 5 + 3 = 8) must be instantly added to a dynamic list, 
+// add a history button on your screen for and list previous results 
+// there. Users should also be able to delete individual history items.
+
+// Use: document.createElement, appendChild, remove
 import { Calculator_button_color } from "./constant.js";
 console.log(Calculator_button_color);
-let number1 = 0
-let number2 = 0
-let result = 0
-
-let expression = ""
+let number1 = 0;
+let number2 = 0;
+let result = 0;
+let historylist = [];
+let expression = "";
 
 let is_operand = false;
 let is_point = false;
@@ -18,7 +26,16 @@ const mathbuttons = document.querySelectorAll(".maths-buttons");
 const AC_button = document.querySelector(".function-AC");
 const back_button = document.querySelector(".function-back");
 const Equal_button = document.querySelector(".function-equal");
+const History_button = document.querySelector(".function-H");
+const history_container = document.querySelector(".history_container");
+const go_back = document.querySelector(".go_back");
+const clear_all = document.querySelector(".clear_all");
+const all_history_container = document.querySelector(".all_history_container");
+// const material_symbols_outlined = document.querySelectorAll(".material-symbols-outlined");
 
+// for (let i = 0; i < material_symbols_outlined.length; i++) {
+//     material_symbols_outlined[i].addEventListener("click",clear_this_history);
+// }
 for (let i = 0; i < nodelist.length; i++) {
     nodelist[i].style.backgroundImage = Calculator_button_color.normal_buttons;
 }
@@ -40,6 +57,83 @@ pointbutton.addEventListener("click",number_point);
 AC_button.addEventListener("click",clear_operation);
 back_button.addEventListener("click",backspace);
 Equal_button.addEventListener("click",perform);
+History_button.addEventListener("click",show_history);
+go_back.addEventListener("click", dont_show_history);
+clear_all.addEventListener("click",clear_history_list);
+
+//              CLEAR HISTORY FUNCTION
+
+
+
+function clear_history_list(){
+    historylist = [];
+    render_history_list()
+}
+function render_history_list(){
+
+    document.querySelectorAll(".history").forEach( (item) => {
+        item.remove();
+
+    })
+
+    historylist.forEach((item, index) => {
+
+        const historyDiv = document.createElement("div");
+        historyDiv.classList.add("history")
+
+        const delete_this_history = document.createElement("span");
+        delete_this_history.classList.add("material-symbols-outlined");
+        delete_this_history.classList.add("Transparent");
+        delete_this_history.textContent = "delete";
+
+        delete_this_history.addEventListener("click",(index) =>{
+            historylist.splice(index,1);
+            render_history_list();
+        })
+        
+        const equation_para = document.createElement("p");
+        equation_para.classList.add("equation_para");
+        
+        const result_para = document.createElement("p");
+        result_para.classList.add("result_para");
+
+        equation_para.textContent = item.equation + " = ";
+        result_para.textContent = item.answer;
+
+        historyDiv.appendChild(delete_this_history);
+        historyDiv.appendChild(equation_para);
+        historyDiv.appendChild(result_para);
+        all_history_container.appendChild(historyDiv);
+    })
+}
+
+//           HISTORY FUNCTION
+
+function dont_show_history(){
+    history_container.classList.add("display_none");
+    for(let i = 0 ; i < nodelistfornumbers.length; i++){
+        nodelistfornumbers[i].classList.remove("display_none");
+    }
+    AC_button.classList.remove("display_none");
+    back_button.classList.remove("display_none");
+    pointbutton.classList.remove("display_none");
+    History_button.classList.remove("display_none");
+}
+// show_history()
+function show_history(){
+    for(let i = 0 ; i < nodelistfornumbers.length; i++){
+        nodelistfornumbers[i].classList.add("display_none");
+    }
+    AC_button.classList.add("display_none");
+    back_button.classList.add("display_none");
+    pointbutton.classList.add("display_none");
+    History_button.classList.add("display_none");
+
+    history_container.classList.remove("display_none");
+    render_history_list();
+    
+}
+
 
 //           INPUT FUNCTIONS 
 
@@ -183,8 +277,15 @@ function perform() {
         result = result + stack[i];
     }
 
-    document.getElementById("user_input").value = result;
-
+    historylist.push({
+        equation : expression ,
+        answer : result
+    });
+    console.log(historylist);
+    // console.log(`${expression} = ${result}`);
+    
+    expression = result;
+    Update_Expression();
 }
 
 
@@ -211,5 +312,3 @@ function is_operand_function(character) {
     }
     return false;
 }
-
-

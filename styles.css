@@ -40,6 +40,7 @@ h1{
     justify-content: center;
     align-items: center;
     max-width: 50%;
+    height: auto;
 }
 .all-buttons-container{
     width: 100%;
@@ -48,9 +49,64 @@ h1{
     grid-template-rows: repeat(4, 1fr);
     gap: 5px;
 }
-#function_AC{
-    grid-column: span 2;
+.history_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 20px;
+    background-color: #101010;
+    width: 100%;
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: span 5;
 }
+.all_history_container{
+    /* border: 2px solid rgb(243, 32, 32); */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 235px;
+    overflow-y: auto;
+}
+.history{
+    height: 17%;
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.clear_all{
+    margin-top: auto;
+    margin-left: 50px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.go_back{
+    font-weight: bold;
+    color: #ffffff;
+    position: absolute;
+    top: 1%;
+    left: 3%;
+    cursor: pointer;
+}
+.material-symbols-outlined {
+    font-size: 1.1rem !important;
+    cursor: pointer;
+}
+.equation_para{
+    font-size: 1.1rem;
+}
+.result_para{
+    font-size: 1.1rem;
+}
+
+/* #function_AC{
+    grid-column: span 2;
+} */
 /* #number_0{
     grid-column: span 2;
 } */
@@ -78,7 +134,16 @@ button:active{
     max-width: 100%;
     /* border: 3px solid cyan; */
 }
-
+                /*  DISPLAY NONE AND BLOCK CLASSES*/
+.display_none{
+    display: none;
+}
+.display_block{
+    display: block;
+}
+.Transparent{
+    background-color: transparent;
+}
 @media screen and (max-width: 480px) {
     h1{
     font-size: 30px;
