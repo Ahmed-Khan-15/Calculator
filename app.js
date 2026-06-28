@@ -176,17 +176,13 @@ function clear_operation() {
     Update_Expression();
 }
 
+//              TOKENIZER FUNCTION
 
-//             PERFORM OPERATION 
+function tokenize(){
 
-
-
-function perform() {
-
-
-    let arr = [];
+let array = [];
     if (expression[0] == "-") {
-        arr.push("-");
+        array.push("-");
         expression = expression.slice(1);
     }
     else if (is_operand_function(expression[0]) || is_operand_function(expression[expression.length - 1])) {
@@ -199,15 +195,15 @@ function perform() {
     for (let i = 0; i < expression.length; i++) {
 
         if (!isNaN(expression[i])) {
-            arr.push(expression[i]);
+            array.push(expression[i]);
             already_operand = false;
         }
         else if (expression[i] == ".") {
-            arr.push(expression[i]);
+            array.push(expression[i]);
             already_operand = true;
         }
         else if (!already_operand && is_operand_function(expression[i])) {
-            arr.push(expression[i]);
+            array.push(expression[i]);
             already_operand = true;
         }
         else {
@@ -217,7 +213,20 @@ function perform() {
 
     }
     arr.push("+");
-    console.log(arr);
+    
+    return arr
+
+}
+
+//             PERFORM OPERATION 
+
+
+
+function perform() {
+
+    let arr = tokenize();
+    
+    // console.log(arr);
 
 
     let stack = [];
