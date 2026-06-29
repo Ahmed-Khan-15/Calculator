@@ -1,15 +1,14 @@
-// Okay good, for your next task: 
-
-// Every time the user clicks the = button, the full equation 
-// (e.g., 5 + 3 = 8) must be instantly added to a dynamic list, 
-// add a history button on your screen for and list previous results 
-// there. Users should also be able to delete individual history items.
-
-// Use: document.createElement, appendChild, remove
 import { Calculator_button_color } from "./constant.js";
-// console.log(Calculator_button_color);
+// console.log(.2+.2);
+// console.log(.2*.2);
+// console.log(2.*.2);
+// console.log(9.8*2.0);
+// console.log(9.8+2.5);
+// console.log(1.*.0);
+// console.log(1.*.0);
+
+let floating_point_number = false;
 let number1 = 0;
-let number2 = 0;
 let result = 0;
 let historylist = [];
 let expression = "";
@@ -146,10 +145,10 @@ function get_number(event_element) {
 }
 
 function number_point(point_button_element) {
-    if (!is_operand) {
+    if (!floating_point_number) {
         expression = expression + point_button_element.target.innerHTML;
         Update_Expression();
-        is_operand = true;
+        floating_point_number = true;
     }
 }
 
@@ -160,6 +159,7 @@ function math_operation(maths_button) {
         number1 = Number(document.getElementById("user_input").value)
 
         is_operand = true;
+        floating_point_number = false;
     }
 }
 
@@ -172,7 +172,8 @@ function Update_Expression() {
 //     CLEAR OPERATION DONE
 function clear_operation() {
     expression = "";
-    is_operand = true;
+    is_operand = false;
+    floating_point_number = false;
     Update_Expression();
 }
 
@@ -181,30 +182,30 @@ function clear_operation() {
 function tokenize(){
 
 let array1 = [];
-    if (expression[0] == "-") {
-        array1.push("-");
-        expression = expression.slice(1);
-    }
-    else if (is_operand_function(expression[0]) || is_operand_function(expression[expression.length - 1])) {
+    // if (expression[0] == "-") {
+    //     array1.push("-");
+    //     expression = expression.slice(1);
+    // }
+    if (expression[0] == "×" || expression[0] == "÷" || is_operand_function(expression[expression.length - 1])) {
         alert("please enter a valid opertion to perform");
         return;
     }
     number1 = 0;
     result = 0;
-    let already_operand = false;
+    let previous_was_operand = false;
     for (let i = 0; i < expression.length; i++) {
 
         if (!isNaN(expression[i])) {
             array1.push(expression[i]);
-            already_operand = false;
+            previous_was_operand = false;
         }
         else if (expression[i] == ".") {
             array1.push(expression[i]);
-            already_operand = true;
+            previous_was_operand = true;
         }
-        else if (!already_operand && is_operand_function(expression[i])) {
+        else if (!previous_was_operand && is_operand_function(expression[i])) {
             array1.push(expression[i]);
-            already_operand = true;
+            previous_was_operand = true;
         }
         else {
             alert("please enter a valid opertion to perform");
@@ -223,33 +224,45 @@ let array1 = [];
 
 
 function perform() {
-
     let arr = tokenize();
     
+    floating_point_number = false;
     console.log(arr);
 
 
     let stack = [];
     let operator = "+";
 
-    for (let i = 0; i <= arr.length; i++) {
-
+    for (let i = 0; i < arr.length; i++) {
+        console.log("i =", i, "arr[i] =", arr[i]);
         if (!isNaN(arr[i])) {
             let j = i;
-            while (!isNaN(arr[j]) && j < arr.length) {
+            while (j < arr.length && !isNaN(arr[j])) {
                 number1 = number1 * 10 + Number(arr[j]);
                 j++;
+                console.log(number1);
+                console.log(j);
+                
             }
+            // console.log("Setting i =", j - 1);
             i = j - 1;
         }
-        else if (arr[i] == ".") {
+        else if (arr[i] == "." && !floating_point_number) {
+            // console.log("Entered decimal branch");
+            floating_point_number = true;
             let j = i + 1;
+            let number2 = 0;
             while (!isNaN(arr[j]) && j < arr.length) {
                 number2 = number2 * 10 + Number(arr[j]);
                 j++;
             }
-            number1 = number1 + "." + number2;
-            number1 = Number(number1);
+            while( number2 > 1){
+                number2 = number2 / 10;
+            }
+            // console.log("this is number2 in perform",number2);
+            number1 = number1 + number2;
+            // console.log("this is number1 in perform",number1);
+            // console.log("In Decimal branch Setting i =", j - 1);
             i = j - 1;
         }
 
@@ -278,7 +291,7 @@ function perform() {
 
             }
             operator = arr[i];
-
+            floating_point_number = false;
             number1 = 0;
         }
     }
@@ -303,14 +316,32 @@ function perform() {
 //          Backspace function   // done
 
 function backspace() {
-    console.log(typeof expression);
-    expression = expression.slice(0, -1);
-    Update_Expression();
+    if(expression){
+        if (expression[ expression.length - 1 ] == "."){
+            floating_point_number = false;
+        }
+        expression = expression.slice(0, -1);
+        Update_Expression();
+        if(expression){
 
-    let last_char = expression.slice(-1);
-
-    if (is_operand_function(last_char)) {
-        is_operand = true;
+            let last_char = expression.slice(-1);
+        
+            if (is_operand_function(last_char)) {
+                is_operand = true;
+            }
+            else{
+                is_operand = false;
+            }
+            
+        }
+        else {
+        is_operand = false;
+        floating_point_number = false;
+    }
+    }
+    else {
+        is_operand = false;
+        floating_point_number = false;
     }
 }
 
